@@ -24,54 +24,55 @@ This tutorial requires you to have already completed the previous tutorials and 
 <h2>Overview</h2>
 
 - Step 1: Use Remote Desktop to connect to your Windows 10 Virtual Machine
-- Step 2: Within your Windows 10 Virtual Machine, Install Wireshark
-- Step 3: Ping the Ubuntu VM to observe ICMP traffic, disable and re-enable ICMP traffic through the NSG
-- Step 4: Observe SSH traffic by connecting through the command line on the Windows VM
-- Step 5: Observe DNS traffic on the Windows VM
-- Step 6: Observe RDP traffic on the Windows VM
-- Step 7: Clean up by deleting the resource groups to ensure we don't incur any charges or waste credits
-
+- Step 2: Within your Windows 10 Virtual Machine, Install the WireShak application
+- Step 3: Ping the Ubuntu Virtual Machine to observe ICMP traffic, disable and re-enable ICMP traffic through the Network Security Group
+- Step 4: Observe SSH traffic on the Windows Virtual Machine
+- Step 5: Observe DNS traffic on the Windows Virtual Machine
+- Step 6: Observe RDP traffic on the Windows Virtual Machine
+- Step 7: Clean up by deleting the resource groups to ensure we don't incur any charges
 <h2>Actions and Observations</h2>
 
 <p>
-<img src="https://i.imgur.com/UyHslgF.jpg"/>
+<img src="https://i.imgur.com/zh6pL9D.png"/>
+<img src="https://i.imgur.com/5jr5619.png"/>
+<img src="https://i.imgur.com/MaPydFb.png"/>
 </p>
 <p>
-First go to your Azure portal if it is not already open https://portal.azure.com/. 
+First, enter the Azure portal by going to https://portal.azure.com/. 
 
-Then get the public IP of the Windows VM and copy it, you can find that on the Virtual Machines section on the portal and clicking on the VM in question. Next, go to the Windows start menu and search "rdp" and open the RDP app, then paste the IP of the Windows VM in the first box and hit connect. Then enter the username and password that we set when we created the VM. Click OK.
+After you enter the portal, go to you Windows VM and copy the public IP address. We will be connecting to this VM by Remote Desktop Connection. To find RDC, type it into the Windows search bar it will be the first selection. A pop up will show up where you will put the public IP address of the VM to connect. After pressing connect, you'll need to use the username and password we created to log in and then pressing OK.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/iqT04F6.png"/>
+<img src="https://i.imgur.com/IvvQ2YL.png"/>
 </p>
 <p>
-When the VM loads up, uncheck all privacy settings. (It doesn't really matter, but it may be faster to set up this way)
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/a9O4aHG.png"/>
-</p>
-<p>
-In the VM, open up edge and go to this URL https://www.wireshark.org/download.html (just copy/paste). Next download the Wireshark x64 installer.
+Check everything to no in the privacy settings when the VM finally loads up.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/9xIE2p1.jpg"/>
+<img src="https://i.imgur.com/y5TSvVp.png"/>
 </p>
 <p>
-Now open the installer and install Wireshark with the defaults.
+In the VM, go to the EDGE browser and download Wireshark. You can copy and paste this link (https://www.wireshark.org/download.html). You will need to download the Windows Installer (64-bit)
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/YEygB7e.png"/>
+<img src="https://i.imgur.com/oO0WZCJ.png"/>
 </p>
 <p>
-Once Wireshark opens, filter by "icmp" packets and hit the blue shark fin icon in the top left to start capturing traffic.
+Open the installer and install everything to the default settings by pressing "Next" all the way to the end.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/xLbHAtN.png"/>
+</p>
+<p>
+When Wireshark is open, filter by "icmp" packets and hit the blue shark fin to start capturing traffic through the VM.
 </p>
 <br />
 
