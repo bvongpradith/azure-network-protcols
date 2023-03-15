@@ -77,7 +77,7 @@ When Wireshark is open, filter by "icmp" packets and hit the blue shark fin to s
 <br />
 
 <p>
-<img src="https://i.imgur.com/xa4Sj67.png"/>
+<img src="https://i.imgur.com/4fxurLf.png"/>
 </p>
 <p>
 Find your Ubuntu VM's private IP and copy it.
@@ -85,23 +85,23 @@ Find your Ubuntu VM's private IP and copy it.
 <br />
 
 <p>
-<img src="https://i.imgur.com/Ajzoggh.png"/>
+<img src="https://i.imgur.com/paiFYqT.png"/>
 </p>
 <p>
-Now go back to the VM open the command line and ping -t the private IP address of the Ubuntu VM to make continuous ICMP traffic that will be captured by Wireshark. We should see requests from the Ubuntu VM's private IP, and replies from our Windows private IP as well.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/FVyFq8w.png"/>
-</p>
-<p>
-Now we are going to disable ICMP traffic from the Ubuntu VM's NSG (network security group) in the Azure portal. To do this, type "NSG" in the Azure portal searchbar and click into Network security groups.
+Head back to your VM and open cmd or powershell through the Windows search bar in the bottom left. You will now ping -t the private IP address of the Unbuntu VM to make a continuous ICMP traffic that you can observe through Wireshark. We should see requests from Ubuntu VM's private IP and replies from our Windows private IP.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/T0yT1Ni.png"/>
+<img src="https://i.imgur.com/RbC2bZL.png"/>
+</p>
+<p>
+We are going to disable ICMP traffic from the Ubuntu virtual machine's network security group in the Azure portal. To get to the NSG page, type in "NSG" in search bar and click onto the service.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/2ZVWZBr.png"/>
 </p>
 <p>
 Find the NSG for the Ubuntu VM.
@@ -109,42 +109,42 @@ Find the NSG for the Ubuntu VM.
 <br />
 
 <p>
-<img src="https://i.imgur.com/iAfxZZo.png"/>
+<img src="https://i.imgur.com/KXUwodG.png"/>
 </p>
 <p>
-Once you found the NSG for the Ubuntu VM, click on inbound security rules.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/Ut5fruj.png"/>
-</p>
-<p>
-Add a new rule with ICMP as the selected protocol, set the action to deny, and set the priority to any number that is lower than the first rule in the list (the lower the number, the higher the priority that the rule has) I set it to 299 as it has higher priority than 300. Now add the rule and wait for it to apply.
+After you are on the NSG page, click on "Inbound security rules".
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/U6QJ1li.png"/>
+<img src="https://i.imgur.com/kqS58Sw.png"/>
 </p>
 <p>
-Now going back into the VM, in the command line hit Ctrl + C to stop the continuous ping that we did with the ping -t command. Now hit the refresh button in Wireshark and continue without saving. Now try to ping the private IP of the Ubuntu VM again, now notice that our ping requests are now being timed out as we are not getting replies from our Ubuntu VM.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/Z91rAc3.png"/>
-</p>
-<p>
-Now lets delete the NSG rule we made on the ubuntu VM
+Add a new rule with ICMP as the protocol and set the action to deny. We must change the priority to a number that is lower than the first rule in the list. The lower number allows the rule to have a higher priority than the other rules that have a higher number. In this tutorial, I set it to 200 as it has a higher priority than 300.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/m2pstmT.png"/>
+<img src="https://i.imgur.com/qSAu6wS.png"/>
 </p>
 <p>
-Now try to ping the Ubuntu VM again using the ping command. We now should see that the Ubuntu VM is now sending replies again!
+After applying the rule, head back into the VM and observe how the ping to the private IP address will time out or fail.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/ZFaMu0f.png"/>
+</p>
+<p>
+Now we will select allow on the rule and the traffic should now continue through.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/NK9QreR.png"/>
+</p>
+<p>
+After applying the rule, we should now see traffic continue again!
 </p>
 <br />
 
