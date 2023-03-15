@@ -144,59 +144,54 @@ Now we will select allow on the rule and the traffic should now continue through
 <img src="https://i.imgur.com/NK9QreR.png"/>
 </p>
 <p>
-After applying the rule, we should now see traffic continue again!
+After applying the rule, we should now see traffic continue on the VM again!
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/vlptP2x.png"/>
+<img src="https://i.imgur.com/dJxpVHL.png"/>
 </p>
 <p>
-Now that we have observed ICMP traffic, we will now connect to our Ubuntu VM via SSH (secure shell) within the command line inside of the Windows VM.
+We have now observed ICMP traffic through RDC between two VMs and will now connect to the Ubuntu VM via SSH or Secure Shell within the command lines of PowerShell. Firstly, you will need to type "SSH (your Ubuntu private IP address). When prompted with 
   
-As the image above shows, in the command line type "SSH (whatever the private IP of your Ubuntu VM is)". 
-  
-When prompted the following
-
-"The authenticity of host '10.0.0.5 (10.0.0.5)' can't be established.
-ECDSA key fingerprint is SHA256:73iEIznECaIszgz83pKTfng9jk2d16JT2ZozJtn3a68.
+  "The authenticity of host '10.0.0.5 (10.0.0.5)' can't be established.
+ECDSA key fingerprint is SHA256:wYAdmAbrJ/JTv69D9C8feZvkyQAHgpvW5ZNdt2AvYfA.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?"
+ 
+  Type "Yes"
 
-Type "yes"
-  
-After connecting it will then prompt you for the password of the Ubuntu VM (we set this when we made it), type the password (note: the password won't be visible as you type it in, it may look like you aren't typing it in but you are).
+  After continuing, it will ask for a password. This is the password that we set when we made the VM so type it in. The password will be invisible when typing so just be aware that it is still typing even though it may not look like it.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/oEBPtxB.png"/>
+<img src="https://i.imgur.com/qwZ0w8l.png"/>
 </p>
 <p>
-Now in Wireshark filter for ssh traffic and refresh, again continue without saving.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/xebnIjE.png"/>
-</p>
-<p>
-In the remote SSH connection within the command line type some linux shell commands like man, ls, pwd, etc and observe the SSH traffic.
-  
-Type "exit" to terminate the SSH connection.
+In wireshark, filter the traffic by "ssh" without saving.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/WOVeWYF.png"/>
+<img src="https://i.imgur.com/lm3cnCf.png"/>
 </p>
 <p>
-Now let's observe DHCP traffic.
+In the SSH connection, type in the command line linux shell commands or anything in general to see the SSH traffic. Afterwards, type "exit" to disconnect from SSH
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/wRHQB9w.png"/>
+<img src="https://i.imgur.com/NFOD1JZ.png"/>
+<img src="https://i.imgur.com/rjfTLR5.png"/>
+</p>
+<p>
+ 
+We will now observe DHCP traffic through our VM.
   
-In wireshark filter by dchp and refresh. In the command line type "ipconfig /renew" to issue a new IP address to the Windows VM, this will use the DHCP protocol and the traffic will be observable in wireshark.
+Back in wireshark, filter by "DHCP" and refresh. In the command line, type in "ipconfig /renew" to give the Windows VM a new IP address. This proccess will use the DHCP protocol and can be observed on wireshark.
   
-Now I think we get the gist of it now. On your own you can try to observe DNS traffic by typing in the command line "nslookup google.com", or filter for RDP traffic in wireshark by typing the in the filter "tcp.port == 3389" and see the constant RDP traffic as we are currently inside of a remote desktop connection.
-  
-Well congrats, you have made it to the end of this lab! Now for the very last step lets clean up our Azure resources so we don't incur any costs.
+Afterwards, we can observe DNS traffic by typing in the command line "nslookup google.com" or any other website to see the traffic and changing the filter in Wireshark to "DNS". Lastly, we will be able to observe the constant RDP traffic by either typing it into the filter or "tcp.port == 3389" in Wireshark. This will conclude this tutorial and we will now delete the resource groups to avoid any costs.
 </p>
 <br />
 
